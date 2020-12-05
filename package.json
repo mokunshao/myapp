@@ -1,0 +1,9 @@
+{
+    "dependencies": {
+        "antd": "^4.9.1",
+        "umi": "^3.3.0"
+    },
+    "scripts": {
+        "dev": "npx umi dev"
+    }
+}
