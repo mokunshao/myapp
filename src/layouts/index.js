@@ -12,7 +12,7 @@ export default (props) => {
             <Header theme="light">
                 <Head></Head>
             </Header>
-            <Content>
+            <Content style={{ display: 'flex', flexDirection: 'column' }}>
                 <Body children={props.children} />
             </Content>
             <Footer>
