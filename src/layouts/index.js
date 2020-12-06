@@ -1,4 +1,3 @@
-// import 'antd/dist/antd.css';
 import './index.less';
 import { Layout } from 'antd';
 import Head from '../components/Head';
@@ -7,6 +6,7 @@ import Body from '../components/Body';
 import { localGet } from '../utils';
 import { useEffect } from 'react';
 import { connect } from 'umi';
+// import 'antd/dist/antd.css';
 
 const { Header, Footer, Content } = Layout;
 
