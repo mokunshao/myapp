@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { List } from 'antd';
+import { List, message } from 'antd';
 import { history } from 'umi';
+import { apiGetTopics } from '../service';
 
 export default () => {
     const [data, setData] = useState([]);
@@ -8,28 +9,12 @@ export default () => {
 
     useEffect(() => {
         setLoading(true);
-
-        setTimeout(() => {
-            setData([
-                {
-                    title: 'Ant Design Title 1',
-                    id: 1,
-                },
-                {
-                    title: 'Ant Design Title 2',
-                    id: 2,
-                },
-                {
-                    title: 'Ant Design Title 3',
-                    id: 3,
-                },
-                {
-                    title: 'Ant Design Title 4',
-                    id: 4,
-                },
-            ]);
+        apiGetTopics().then((res) => {
+            if (res && res.data) {
+                setData(res.data);
+            }
             setLoading(false);
-        }, 1000);
+        });
     }, []);
 
     const renderItem = (item) => (

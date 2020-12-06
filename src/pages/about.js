@@ -1,3 +1,3 @@
 export default () => {
-    return <div>about</div>;
+    return <div style={{ padding: '1em' }}>小论坛是一个普通的论坛</div>;
 };
