@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { List, message } from 'antd';
+import { List } from 'antd';
 import { history } from 'umi';
 import { apiGetTopics } from '../service';
 
@@ -10,9 +10,7 @@ export default () => {
     useEffect(() => {
         setLoading(true);
         apiGetTopics().then((res) => {
-            if (res && res.data) {
-                setData(res.data);
-            }
+            setData(res.data);
             setLoading(false);
         });
     }, []);
