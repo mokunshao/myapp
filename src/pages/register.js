@@ -1,4 +1,6 @@
 import { Form, Input, Button } from 'antd';
+import { apiRegister } from '../service';
+import { history } from 'umi';
 
 const layout = {
     labelCol: {
@@ -8,7 +10,12 @@ const layout = {
 
 export default () => {
     const onFinish = (values) => {
-        console.log('Success:', values);
+        const { username, password } = values;
+        apiRegister(username, password).then((res) => {
+            if (res.status === 200) {
+                history.push('/login');
+            }
+        });
     };
 
     const onFinishFailed = (errorInfo) => {

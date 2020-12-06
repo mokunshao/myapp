@@ -2,6 +2,7 @@ import { message } from 'antd';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:9000';
+axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(
     (response) => response,
@@ -22,5 +23,19 @@ export const apiGetTopicDetail = (id) => {
 export const apiDeleteTopic = (id) => {
     return axios.post('/topic/delete', {
         id,
+    });
+};
+
+export const apiLogin = (username, password) => {
+    return axios.post('/user/login', {
+        username,
+        password,
+    });
+};
+
+export const apiRegister = (username, password) => {
+    return axios.post('/user/add', {
+        username,
+        password,
     });
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { List } from 'antd';
 import { history } from 'umi';
 import { apiGetTopics } from '../service';
+import TopicInput from '../components/TopicInput';
 
 export default () => {
     const [data, setData] = useState([]);
@@ -33,13 +34,15 @@ export default () => {
     );
 
     return (
-        <div>
+        <>
             <List
                 loading={loading}
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={renderItem}
+                style={{ flex: 1 }}
             />
-        </div>
+            <TopicInput />
+        </>
     );
 };
