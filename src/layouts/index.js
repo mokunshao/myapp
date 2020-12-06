@@ -8,29 +8,31 @@ import { localGet } from '../utils';
 import { store } from '../store';
 import { useContext, useEffect } from 'react';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 export default (props) => {
     const context = useContext(store);
 
     useEffect(() => {
         const user = localGet('user');
-        console.log(user);
         if (user) {
             context.user = user;
         }
+        console.log(44, context);
     }, []);
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Header theme="light">
-                <Head></Head>
-            </Header>
-            <Content style={{ display: 'flex', flexDirection: 'column' }}>
-                <Body children={props.children} />
-            </Content>
-            <Footer>
-                <Foot />
-            </Footer>
-        </Layout>
+        <store.Provider value={context}>
+            <Layout style={{ minHeight: '100vh' }}>
+                <Header theme="light">
+                    <Head></Head>
+                </Header>
+                <Content style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Body children={props.children} />
+                </Content>
+                <Footer>
+                    <Foot />
+                </Footer>
+            </Layout>
+        </store.Provider>
     );
 };

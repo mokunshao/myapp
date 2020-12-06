@@ -40,6 +40,10 @@ export const apiRegister = (username, password) => {
     });
 };
 
+export const apiLogout = () => {
+    return axios.post('/user/logout');
+};
+
 export const apiPostTopic = (title, content) => {
     return axios.post('/topic/add', {
         title,
