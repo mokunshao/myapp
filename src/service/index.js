@@ -18,3 +18,9 @@ export const apiGetTopics = () => {
 export const apiGetTopicDetail = (id) => {
     return axios.get('/topic/detail/' + id);
 };
+
+export const apiDeleteTopic = (id) => {
+    return axios.post('/topic/delete', {
+        id,
+    });
+};
