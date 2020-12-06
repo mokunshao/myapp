@@ -1,19 +1,22 @@
 import { Menu, Row, Col } from 'antd';
 import HeadLogo from './HeadLogo';
-import { history } from 'umi';
+import { history, connect } from 'umi';
 import { localRemove } from '../utils';
-import { store } from '../store';
-import { useContext } from 'react';
+// import { store } from '../store';
+// import { useContext } from 'react';
 import { apiLogout } from '../service';
 
-export default () => {
-    const context = useContext(store);
-    console.log('Head', context && context.user);
+export default (props) => {
+    // const context = useContext(store);
+    // console.log('Head', context && context.user);
+    const user = props.global?.user;
+
+    // console.log(user);
 
     const action1 = () => (
         <>
             <Menu.Item key="user" disabled>
-                {context?.user?.username}
+                {user?.username}
             </Menu.Item>
             <Menu.Item key="logout" onClick={onClickLogout}>
                 退出
@@ -61,7 +64,7 @@ export default () => {
                     <Menu.Item key="about" onClick={onClickAbout}>
                         关于
                     </Menu.Item>
-                    {context?.user ? action1() : action2()}
+                    {user?.username ? action1() : action2()}
                 </Menu>
             </Col>
         </Row>

@@ -5,34 +5,32 @@ import Head from '../components/Head';
 import Foot from '../components/Foot';
 import Body from '../components/Body';
 import { localGet } from '../utils';
-import { store } from '../store';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { connect } from 'umi';
 
 const { Header, Footer, Content } = Layout;
-export default (props) => {
-    const context = useContext(store);
 
+export default connect(({ global }) => {
+    return { global };
+})((props) => {
     useEffect(() => {
         const user = localGet('user');
         if (user) {
-            context.user = user;
+            props.dispatch({ type: 'global/save', payload: { user } });
         }
-        console.log(44, context);
     }, []);
 
     return (
-        <store.Provider value={context}>
-            <Layout style={{ minHeight: '100vh' }}>
-                <Header theme="light">
-                    <Head></Head>
-                </Header>
-                <Content style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Body children={props.children} />
-                </Content>
-                <Footer>
-                    <Foot />
-                </Footer>
-            </Layout>
-        </store.Provider>
+        <Layout style={{ minHeight: '100vh' }}>
+            <Header theme="light">
+                <Head global={props.global}></Head>
+            </Header>
+            <Content style={{ display: 'flex', flexDirection: 'column' }}>
+                <Body children={props.children} />
+            </Content>
+            <Footer>
+                <Foot />
+            </Footer>
+        </Layout>
     );
-};
+});

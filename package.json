@@ -1,5 +1,6 @@
 {
     "dependencies": {
+        "@umijs/preset-react": "^1.7.6",
         "antd": "^4.9.1",
         "axios": "^0.21.0",
         "umi": "^3.3.0"

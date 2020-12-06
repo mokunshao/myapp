@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { apiLogin } from '../service';
-import { history } from 'umi';
-import { store } from '../store';
+import { history, connect } from 'umi';
+// import { store } from '../store';
 import { localSave } from '../utils';
 
 const layout = {
@@ -11,15 +11,18 @@ const layout = {
     },
 };
 
-export default () => {
-    const context = useContext(store);
+export default connect(({ global }) => ({ global }))((props) => {
+    // const context = useContext(store);
 
     const onFinish = (values) => {
         const { username, password } = values;
-        apiLogin(username, password).then((res) => {
+        apiLogin(username, password).then(async (res) => {
             if (res.status === 200) {
-                context.user = res.data;
-                localSave('user', res.data);
+                const user = res.data;
+                if (user) {
+                    props.dispatch({ type: 'global/save', payload: { user } });
+                }
+                localSave('user', user);
                 history.push('/');
             }
         });
@@ -75,4 +78,4 @@ export default () => {
             </div>
         </div>
     );
-};
+});

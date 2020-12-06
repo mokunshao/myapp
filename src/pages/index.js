@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { List } from 'antd';
-import { history } from 'umi';
+import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
-import { store } from '../store';
+// import { store } from '../store';
 
-export default () => {
+export default connect(({ global }) => ({ global }))((props) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const context = useContext(store);
+    // const context = useContext(store);
 
     const fetchData = () => {
         setLoading(true);
@@ -42,7 +42,6 @@ export default () => {
 
     return (
         <>
-            {JSON.stringify(context)}
             <List
                 loading={loading}
                 itemLayout="horizontal"
@@ -53,4 +52,4 @@ export default () => {
             <TopicInput callback={fetchData} />
         </>
     );
-};
+});
