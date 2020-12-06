@@ -11,12 +11,16 @@ export default () => {
 
     const context = useContext(store);
 
-    useEffect(() => {
+    const fetchData = () => {
         setLoading(true);
         apiGetTopics().then((res) => {
             setData(res.data);
             setLoading(false);
         });
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     const renderItem = (item) => (
@@ -46,7 +50,7 @@ export default () => {
                 renderItem={renderItem}
                 style={{ flex: 1 }}
             />
-            <TopicInput />
+            <TopicInput callback={fetchData} />
         </>
     );
 };

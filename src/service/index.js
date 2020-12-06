@@ -39,3 +39,10 @@ export const apiRegister = (username, password) => {
         password,
     });
 };
+
+export const apiPostTopic = (title, content) => {
+    return axios.post('/topic/add', {
+        title,
+        content,
+    });
+};

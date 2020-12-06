@@ -14,6 +14,7 @@ export default (props) => {
 
     useEffect(() => {
         const user = localGet('user');
+        console.log(user);
         if (user) {
             context.user = user;
         }
