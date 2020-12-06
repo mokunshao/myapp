@@ -31,7 +31,7 @@ export default (props) => {
     return (
         <div>
             <TopicCard data={topic} loading={loading}></TopicCard>
-            <CommentsCard data={comments} />
+            <CommentsCard data={comments} loading={loading} />
             <CommentInput />
         </div>
     );
