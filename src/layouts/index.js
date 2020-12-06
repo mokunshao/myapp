@@ -4,9 +4,21 @@ import { Layout } from 'antd';
 import Head from '../components/Head';
 import Foot from '../components/Foot';
 import Body from '../components/Body';
+import { localGet } from '../utils';
+import { store } from '../store';
+import { useContext, useEffect } from 'react';
 
 const { Header, Footer, Sider, Content } = Layout;
 export default (props) => {
+    const context = useContext(store);
+
+    useEffect(() => {
+        const user = localGet('user');
+        if (user) {
+            context.user = user;
+        }
+    }, []);
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Header theme="light">

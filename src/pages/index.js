@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { List } from 'antd';
 import { history } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
+import { store } from '../store';
 
 export default () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const context = useContext(store);
 
     useEffect(() => {
         setLoading(true);
@@ -35,6 +38,7 @@ export default () => {
 
     return (
         <>
+            {JSON.stringify(context)}
             <List
                 loading={loading}
                 itemLayout="horizontal"

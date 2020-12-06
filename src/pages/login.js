@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { apiLogin } from '../service';
 import { history } from 'umi';
+import { store } from '../store';
+import { localSave } from '../utils';
 
 const layout = {
     labelCol: {
@@ -9,11 +12,14 @@ const layout = {
 };
 
 export default () => {
+    const context = useContext(store);
+
     const onFinish = (values) => {
-        // console.log('Success:', values);
         const { username, password } = values;
         apiLogin(username, password).then((res) => {
             if (res.status === 200) {
+                context.user = res.data;
+                localSave('user', res.data);
                 history.push('/');
             }
         });

@@ -1,8 +1,39 @@
 import { Menu, Row, Col } from 'antd';
 import HeadLogo from './HeadLogo';
 import { history } from 'umi';
+import { localRemove } from '../utils';
+import { store } from '../store';
+import { useContext } from 'react';
 
 export default () => {
+    const context = useContext(store);
+
+    const action1 = (
+        <>
+            <Menu.Item key="user" disabled>
+                {context?.user?.username}
+            </Menu.Item>
+            <Menu.Item key="logout" onClick={onClickLogout}>
+                退出
+            </Menu.Item>
+        </>
+    );
+
+    const action2 = (
+        <>
+            <Menu.Item key="register" onClick={onClickRegister}>
+                注册
+            </Menu.Item>
+            <Menu.Item key="login" onClick={onClickLogin}>
+                登录
+            </Menu.Item>
+        </>
+    );
+
+    function onClickLogout() {
+        localRemove('user');
+        location.reload();
+    }
     function onClickAbout() {
         history.push('/about');
     }
@@ -28,12 +59,7 @@ export default () => {
                         <Menu.Item key="about" onClick={onClickAbout}>
                             关于
                         </Menu.Item>
-                        <Menu.Item key="register" onClick={onClickRegister}>
-                            注册
-                        </Menu.Item>
-                        <Menu.Item key="login" onClick={onClickLogin}>
-                            登录
-                        </Menu.Item>
+                        {context.user ? action1 : action2}
                     </Menu>
                 </Col>
             </Row>
