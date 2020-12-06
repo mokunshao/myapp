@@ -3,13 +3,10 @@ import { List } from 'antd';
 import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
-// import { store } from '../store';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    // const context = useContext(store);
 
     const fetchData = () => {
         setLoading(true);
@@ -36,6 +33,10 @@ export default connect(({ global }) => ({ global }))((props) => {
                         {item.title}
                     </a>
                 }
+                description={
+                    '发表于 ' +
+                    new Date(item.createdTime * 1000).toLocaleDateString()
+                }
             />
         </List.Item>
     );
@@ -49,7 +50,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                 renderItem={renderItem}
                 style={{ flex: 1 }}
             />
-            <TopicInput callback={fetchData} />
+            {props.global.user.username && <TopicInput callback={fetchData} />}
         </>
     );
 });

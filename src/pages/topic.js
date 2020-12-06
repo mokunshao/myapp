@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import TopicCard from '../components/TopicCard';
 import CommentsCard from '../components/CommentsCard';
 import CommentInput from '../components/CommentInput';
+import { connect } from 'umi';
 
-export default (props) => {
+export default connect(({ global }) => ({ global }))((props) => {
     const [loading, setLoading] = useState(false);
     const [topic, setTopic] = useState({});
     const [comments, setComments] = useState([]);
@@ -32,7 +33,7 @@ export default (props) => {
         <div>
             <TopicCard data={topic} loading={loading}></TopicCard>
             <CommentsCard data={comments} loading={loading} />
-            <CommentInput />
+            {props.global.user.username && <CommentInput />}
         </div>
     );
-};
+});

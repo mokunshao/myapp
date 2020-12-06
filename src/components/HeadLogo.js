@@ -8,7 +8,7 @@ export default () => {
         <div
             style={{
                 display: 'inline',
-                color: '#19aa8d',
+                // color: '#19aa8d',
                 cursor: 'pointer',
                 userSelect: 'none',
                 fontWeight: 'bolder',
