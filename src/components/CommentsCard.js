@@ -5,7 +5,7 @@ import { formatDate } from '../utils';
 import { apiDeletComment } from '../service';
 
 export default connect(({ global }) => ({ global }))((props) => {
-    const { data, loading, global, callback } = props;
+    const { data, loading, global, callback, callback2 } = props;
 
     const onDelete = (item) => {
         apiDeletComment(item.id).then((res) => {
@@ -48,7 +48,13 @@ export default connect(({ global }) => ({ global }))((props) => {
                                                 >
                                                     <a>删除</a>
                                                 </Popconfirm>
-                                                <a>编辑</a>
+                                                <a
+                                                    onClick={() =>
+                                                        callback2(item.id)
+                                                    }
+                                                >
+                                                    编辑
+                                                </a>
                                             </Space>
                                         </>
                                     )}

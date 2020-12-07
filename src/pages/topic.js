@@ -1,5 +1,6 @@
 import { apigetComments, apiGetTopicDetail } from '../service';
 import { useState, useEffect } from 'react';
+import { Modal } from 'antd';
 import TopicCard from '../components/TopicCard';
 import CommentsCard from '../components/CommentsCard';
 import CommentInput from '../components/CommentInput';
@@ -10,7 +11,7 @@ export default connect(({ global }) => ({ global }))((props) => {
     const [commentsloading, setCommentsloading] = useState(false);
     const [topic, setTopic] = useState({});
     const [comments, setComments] = useState([]);
-
+    const [commentId, setCommentId] = useState(null);
     function getId() {
         const {
             location: { query },
@@ -54,6 +55,21 @@ export default connect(({ global }) => ({ global }))((props) => {
         const id = getId();
         getTopic(id);
     }
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = (id) => {
+        setCommentId(id);
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        form.submit();
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     return (
         <div>
@@ -63,10 +79,21 @@ export default connect(({ global }) => ({ global }))((props) => {
                 callback={reloadTopic}
             ></TopicCard>
             <CommentsCard
+                callback2={showModal}
                 data={comments}
                 loading={commentsloading}
                 callback={reloadComment}
             />
+            <Modal
+                title="编辑评论"
+                visible={isModalVisible}
+                onOk={handleOk}
+                okText="提交"
+                cancelText="取消"
+                onCancel={handleCancel}
+            >
+                {commentId}
+            </Modal>
             {props.global.user.username && (
                 <CommentInput id={topic.id} callback={reloadComment} />
             )}
