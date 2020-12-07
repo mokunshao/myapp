@@ -1,4 +1,4 @@
-import { apiGetTopicDetail } from '../service';
+import { apigetComments, apiGetTopicDetail } from '../service';
 import { useState, useEffect } from 'react';
 import TopicCard from '../components/TopicCard';
 import CommentsCard from '../components/CommentsCard';
@@ -7,6 +7,7 @@ import { connect } from 'umi';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const [loading, setLoading] = useState(false);
+    const [commentsloading, setCommentsloading] = useState(false);
     const [topic, setTopic] = useState({});
     const [comments, setComments] = useState([]);
 
@@ -18,8 +19,7 @@ export default connect(({ global }) => ({ global }))((props) => {
         return id;
     }
 
-    useEffect(() => {
-        const id = getId();
+    function getTopic(id) {
         setLoading(true);
         apiGetTopicDetail(id).then((res) => {
             if (res.data) {
@@ -27,12 +27,28 @@ export default connect(({ global }) => ({ global }))((props) => {
                 setLoading(false);
             }
         });
+    }
+
+    function getComments(id) {
+        setCommentsloading(true);
+        apigetComments(id).then((res) => {
+            if (res.data) {
+                setComments(res.data);
+                setCommentsloading(false);
+            }
+        });
+    }
+
+    useEffect(() => {
+        const id = getId();
+        getTopic(id);
+        getComments(id);
     }, []);
 
     return (
         <div>
             <TopicCard data={topic} loading={loading}></TopicCard>
-            <CommentsCard data={comments} loading={loading} />
+            <CommentsCard data={comments} loading={commentsloading} />
             {props.global.user.username && <CommentInput />}
         </div>
     );

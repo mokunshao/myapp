@@ -50,3 +50,14 @@ export const apiPostTopic = (title, content) => {
         content,
     });
 };
+
+export const apiPostComment = (topicId, content) => {
+    return axios.post('/topic_comment/add', {
+        topicId,
+        content,
+    });
+};
+
+export const apigetComments = (topicId) => {
+    return axios.get('/topic_comment/' + topicId);
+};
