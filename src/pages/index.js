@@ -48,7 +48,8 @@ export default connect(({ global }) => ({ global }))((props) => {
     );
 
     return (
-        <>
+        <div>
+            {props.global.user.username && <TopicInput callback={fetchData} />}
             <List
                 loading={loading}
                 itemLayout="horizontal"
@@ -56,7 +57,6 @@ export default connect(({ global }) => ({ global }))((props) => {
                 renderItem={renderItem}
                 style={{ flex: 1 }}
             />
-            {props.global.user.username && <TopicInput callback={fetchData} />}
-        </>
+        </div>
     );
 });

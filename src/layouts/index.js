@@ -25,7 +25,12 @@ export default connect(({ global }) => {
             <Header theme="light">
                 <Head global={props.global}></Head>
             </Header>
-            <Content style={{ display: 'flex', flexDirection: 'column' }}>
+            <Content
+                className="bg"
+                style={{
+                    padding: '24px',
+                }}
+            >
                 <Body children={props.children} />
             </Content>
             <Footer>

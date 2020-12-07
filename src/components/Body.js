@@ -2,8 +2,10 @@ export default (props) => {
     return (
         <div
             style={{
+                flexDirection: 'column',
+                maxWidth: '1000px',
                 backgroundColor: 'white',
-                margin: '24px',
+                margin: 'auto',
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',

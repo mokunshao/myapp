@@ -1,4 +1,4 @@
-import { Form, Button, Input, Card } from 'antd';
+import { Form, Button, Input, Card, message } from 'antd';
 import { apiPostTopic } from '../service';
 const { useForm } = Form;
 
@@ -10,6 +10,7 @@ export default ({ callback }) => {
     const onFinish = (values) => {
         const { title, content } = values;
         apiPostTopic(title, content).then(() => {
+            message.success('发表成功');
             form.resetFields();
             callback();
         });
