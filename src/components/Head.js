@@ -1,4 +1,4 @@
-import { Menu, Row, Col } from 'antd';
+import { Menu, Row, Col, Space } from 'antd';
 import HeadLogo from './HeadLogo';
 import { history, connect } from 'umi';
 import { localRemove } from '../utils';
@@ -15,23 +15,17 @@ export default (props) => {
 
     const action1 = () => (
         <>
-            <Menu.Item key="user" disabled>
-                {user?.username}
-            </Menu.Item>
-            <Menu.Item key="logout" onClick={onClickLogout}>
-                退出
-            </Menu.Item>
+            <a disabled>{user?.username}</a>
+            <a onClick={onClickLogout}>退出</a>
         </>
     );
 
     const action2 = () => (
         <>
-            <Menu.Item key="register" onClick={onClickRegister}>
-                注册
-            </Menu.Item>
-            <Menu.Item key="login" onClick={onClickLogin}>
+            <a onClick={onClickRegister}>注册</a>
+            <a key="login" onClick={onClickLogin}>
                 登录
-            </Menu.Item>
+            </a>
         </>
     );
 
@@ -50,22 +44,15 @@ export default (props) => {
         history.push('/login');
     }
     return (
-        <Row wrap={false}>
+        <Row>
             <Col flex="auto">
                 <HeadLogo />
             </Col>
-            <Col flex="none">
-                <Menu
-                    focusable={false}
-                    // onClick={this.handleClick}
-                    // selectedKeys={[current]}
-                    mode="horizontal"
-                >
-                    <Menu.Item key="about" onClick={onClickAbout}>
-                        关于
-                    </Menu.Item>
+            <Col flex="wrap">
+                <Space size="large">
+                    <a onClick={onClickAbout}>关于</a>
                     {user?.username ? action1() : action2()}
-                </Menu>
+                </Space>
             </Col>
         </Row>
     );
