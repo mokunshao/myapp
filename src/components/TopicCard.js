@@ -42,7 +42,7 @@ export default connect(({ global }) => ({ global }))((props) => {
 
     return (
         <Card title={data.title} loading={loading}>
-            {data.content}
+            <div style={{ whiteSpace: 'pre-wrap' }}>{data.content}</div>
             <div>
                 <br />
                 <Space>

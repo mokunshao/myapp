@@ -33,7 +33,9 @@ export default connect(({ global }) => ({ global }))((props) => {
                             author={item.user?.username}
                             content={
                                 <div>
-                                    {item.content}
+                                    <div style={{ whiteSpace: 'pre-wrap' }}>
+                                        {item.content}
+                                    </div>
                                     {item.userId === global.user.id && (
                                         <>
                                             <br></br>
