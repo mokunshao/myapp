@@ -1,11 +1,31 @@
-import { Card, Popconfirm, Avatar, Space } from 'antd';
+import { useState } from 'react';
+import { Card, Popconfirm, Avatar, Space, Modal, Form } from 'antd';
 import { history, connect } from 'umi';
 import { apiDeleteTopic } from '../service';
 import { formatDate } from '../utils';
 import { UserOutlined } from '@ant-design/icons';
+import TopicEditForm from '../components/TopicEditForm';
+
+const { useForm } = Form;
 
 export default connect(({ global }) => ({ global }))((props) => {
-    const { data, loading, global } = props;
+    const [form] = useForm();
+    const { data, loading, callback } = props;
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        form.submit();
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     const onDelete = () => {
         apiDeleteTopic(data.id).then((res) => {
             if (res.status === 200) {
@@ -47,10 +67,26 @@ export default connect(({ global }) => ({ global }))((props) => {
                         >
                             <a>删除</a>
                         </Popconfirm>
-                        <a>编辑</a>
+                        <a onClick={showModal}>编辑</a>
                     </Space>
                 </div>
             )}
+
+            <Modal
+                title="编辑帖子"
+                visible={isModalVisible}
+                onOk={handleOk}
+                okText="提交"
+                cancelText="取消"
+                onCancel={handleCancel}
+            >
+                <TopicEditForm
+                    form={form}
+                    id={data.id}
+                    callback={callback}
+                    initData={data}
+                />
+            </Modal>
         </Card>
     );
 });

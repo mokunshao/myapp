@@ -50,9 +50,18 @@ export default connect(({ global }) => ({ global }))((props) => {
         getComments(id);
     }
 
+    function reloadTopic() {
+        const id = getId();
+        getTopic(id);
+    }
+
     return (
         <div>
-            <TopicCard data={topic} loading={loading}></TopicCard>
+            <TopicCard
+                data={topic}
+                loading={loading}
+                callback={reloadTopic}
+            ></TopicCard>
             <CommentsCard
                 data={comments}
                 loading={commentsloading}

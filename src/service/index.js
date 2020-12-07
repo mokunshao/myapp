@@ -57,6 +57,14 @@ export const apiPostTopic = (title, content) => {
     });
 };
 
+export const apiUpdateTopic = (id, title, content) => {
+    return axios.post('/topic/update', {
+        id,
+        title,
+        content,
+    });
+};
+
 export const apiPostComment = (topicId, content) => {
     return axios.post('/topic_comment/add', {
         topicId,
