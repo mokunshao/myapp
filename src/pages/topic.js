@@ -45,11 +45,18 @@ export default connect(({ global }) => ({ global }))((props) => {
         getComments(id);
     }, []);
 
+    function reloadComment() {
+        const id = getId();
+        getComments(id);
+    }
+
     return (
         <div>
             <TopicCard data={topic} loading={loading}></TopicCard>
             <CommentsCard data={comments} loading={commentsloading} />
-            {props.global.user.username && <CommentInput />}
+            {props.global.user.username && (
+                <CommentInput id={topic.id} callback={reloadComment} />
+            )}
         </div>
     );
 });
