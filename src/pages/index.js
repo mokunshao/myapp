@@ -3,6 +3,7 @@ import { List } from 'antd';
 import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
+import { formatDate } from '../utils';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const [data, setData] = useState([]);
@@ -33,10 +34,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                         {item.title}
                     </a>
                 }
-                description={
-                    '发表于 ' +
-                    new Date(item.createdTime * 1000).toLocaleDateString()
-                }
+                description={'发表于 ' + formatDate(item.createdTime)}
             />
         </List.Item>
     );
