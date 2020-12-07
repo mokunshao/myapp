@@ -38,14 +38,17 @@ export default connect(({ global }) => ({ global }))((props) => {
             {isShowDeleteButton && (
                 <div>
                     <br></br>
-                    <Popconfirm
-                        title="是否确定删除？"
-                        onConfirm={onDelete}
-                        okText="是"
-                        cancelText="否"
-                    >
-                        <a>删除</a>
-                    </Popconfirm>
+                    <Space>
+                        <Popconfirm
+                            title="是否确定删除？"
+                            onConfirm={onDelete}
+                            okText="是"
+                            cancelText="否"
+                        >
+                            <a>删除</a>
+                        </Popconfirm>
+                        <a>编辑</a>
+                    </Space>
                 </div>
             )}
         </Card>

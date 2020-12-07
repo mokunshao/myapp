@@ -53,7 +53,11 @@ export default connect(({ global }) => ({ global }))((props) => {
     return (
         <div>
             <TopicCard data={topic} loading={loading}></TopicCard>
-            <CommentsCard data={comments} loading={commentsloading} />
+            <CommentsCard
+                data={comments}
+                loading={commentsloading}
+                callback={reloadComment}
+            />
             {props.global.user.username && (
                 <CommentInput id={topic.id} callback={reloadComment} />
             )}

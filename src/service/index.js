@@ -61,3 +61,9 @@ export const apiPostComment = (topicId, content) => {
 export const apigetComments = (topicId) => {
     return axios.get('/topic_comment/' + topicId);
 };
+
+export const apiDeletComment = (id) => {
+    return axios.post('/topic_comment/delete', {
+        id,
+    });
+};
