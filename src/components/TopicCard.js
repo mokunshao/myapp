@@ -1,7 +1,8 @@
-import { Card, Popconfirm } from 'antd';
+import { Card, Popconfirm, Avatar, Space } from 'antd';
 import { history, connect } from 'umi';
 import { apiDeleteTopic } from '../service';
 import { formatDate } from '../utils';
+import { UserOutlined } from '@ant-design/icons';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const { data, loading, global } = props;
@@ -24,9 +25,14 @@ export default connect(({ global }) => ({ global }))((props) => {
             {data.content}
             <div>
                 <br />
-                <div>本文由 {data.user?.username} 发表</div>
-                <div>发表于 {formatDate(data.createdTime)}</div>
-                <div>最后编辑于 {formatDate(data.updatedTime)}</div>
+                <Space>
+                    <Avatar shape="square" size={64} icon={<UserOutlined />} />
+                    <div>
+                        <div>本文由 {data.user?.username} 发表</div>
+                        <div>发表于 {formatDate(data.createdTime)}</div>
+                        <div>最后编辑于 {formatDate(data.updatedTime)}</div>
+                    </div>
+                </Space>
             </div>
 
             {isShowDeleteButton && (

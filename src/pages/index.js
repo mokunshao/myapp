@@ -1,5 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
-import { List } from 'antd';
+import { useState, useEffect } from 'react';
+import { List, Avatar } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
@@ -24,6 +25,9 @@ export default connect(({ global }) => ({ global }))((props) => {
     const renderItem = (item) => (
         <List.Item>
             <List.Item.Meta
+                avatar={
+                    <Avatar shape="square" size={64} icon={<UserOutlined />} />
+                }
                 style={{ padding: '0 10px' }}
                 title={
                     <a
