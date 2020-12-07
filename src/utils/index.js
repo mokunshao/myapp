@@ -7,9 +7,9 @@ export function localSave(key, data) {
 
 export function localGet(key) {
     const val = localStorage.getItem(key);
-    if (val === null || val === 'null') {
+    if (val === 'null') {
         return null;
-    } else if (val === 'undefined') {
+    } else if (val === undefined || val === 'undefined') {
         return undefined;
     } else {
         try {

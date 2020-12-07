@@ -1,5 +1,7 @@
 import { message } from 'antd';
 import axios from 'axios';
+import { history } from 'umi';
+import { localSave } from '../utils';
 
 axios.defaults.baseURL = 'http://localhost:9000';
 axios.defaults.withCredentials = true;
@@ -8,6 +10,10 @@ axios.interceptors.response.use(
     (response) => response,
     (error) => {
         message.error('请求失败');
+        if (error.response.status === 401) {
+            localSave('user', null);
+            history.push('/login');
+        }
         return error;
     },
 );
