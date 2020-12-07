@@ -34,7 +34,11 @@ export default connect(({ global }) => ({ global }))((props) => {
                         {item.title}
                     </a>
                 }
-                description={'发表于 ' + formatDate(item.createdTime)}
+                description={
+                    item.user?.username +
+                    ' 发表于 ' +
+                    formatDate(item.createdTime)
+                }
             />
         </List.Item>
     );
