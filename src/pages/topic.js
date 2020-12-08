@@ -1,17 +1,22 @@
 import { apigetComments, apiGetTopicDetail } from '../service';
 import { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { Modal, Form } from 'antd';
 import TopicCard from '../components/TopicCard';
 import CommentsCard from '../components/CommentsCard';
 import CommentInput from '../components/CommentInput';
 import { connect } from 'umi';
+import TopicCommentEditForm from '../components/TopicCommentEditForm';
+
+const { useForm } = Form;
 
 export default connect(({ global }) => ({ global }))((props) => {
     const [loading, setLoading] = useState(false);
     const [commentsloading, setCommentsloading] = useState(false);
     const [topic, setTopic] = useState({});
     const [comments, setComments] = useState([]);
-    const [commentId, setCommentId] = useState(null);
+    const [editComment, setEditComment] = useState(null);
+    const [form] = useForm();
+
     function getId() {
         const {
             location: { query },
@@ -46,7 +51,7 @@ export default connect(({ global }) => ({ global }))((props) => {
         getComments(id);
     }, []);
 
-    function reloadComment() {
+    function reloadComments() {
         const id = getId();
         getComments(id);
     }
@@ -57,8 +62,9 @@ export default connect(({ global }) => ({ global }))((props) => {
     }
     const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const showModal = (id) => {
-        setCommentId(id);
+    const showModal = (item) => {
+        setEditComment(item);
+        form.setFieldsValue(item);
         setIsModalVisible(true);
     };
 
@@ -82,7 +88,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                 callback2={showModal}
                 data={comments}
                 loading={commentsloading}
-                callback={reloadComment}
+                callback={reloadComments}
             />
             <Modal
                 title="编辑评论"
@@ -92,10 +98,16 @@ export default connect(({ global }) => ({ global }))((props) => {
                 cancelText="取消"
                 onCancel={handleCancel}
             >
-                {commentId}
+                {editComment && (
+                    <TopicCommentEditForm
+                        form={form}
+                        callback={reloadComments}
+                        initData={editComment}
+                    />
+                )}
             </Modal>
             {props.global.user.username && (
-                <CommentInput id={topic.id} callback={reloadComment} />
+                <CommentInput id={topic.id} callback={reloadComments} />
             )}
         </div>
     );

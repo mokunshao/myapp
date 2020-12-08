@@ -81,3 +81,10 @@ export const apiDeletComment = (id) => {
         id,
     });
 };
+
+export const apiUpdateTopicComment = (id, content) => {
+    return axios.post('/topic_comment/update', {
+        id,
+        content,
+    });
+};

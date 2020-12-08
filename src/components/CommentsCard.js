@@ -52,7 +52,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                                                 </Popconfirm>
                                                 <a
                                                     onClick={() =>
-                                                        callback2(item.id)
+                                                        callback2(item)
                                                     }
                                                 >
                                                     编辑
