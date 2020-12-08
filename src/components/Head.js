@@ -16,6 +16,7 @@ export default (props) => {
     const action1 = () => (
         <>
             <a disabled>{user?.username}</a>
+            <a onClick={onClickSettings}>设置</a>
             <a onClick={onClickLogout}>退出</a>
         </>
     );
@@ -36,6 +37,9 @@ export default (props) => {
     }
     function onClickAbout() {
         history.push('/about');
+    }
+    function onClickSettings() {
+        history.push('/settings');
     }
     function onClickRegister() {
         history.push('/register');

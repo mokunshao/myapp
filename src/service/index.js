@@ -88,3 +88,10 @@ export const apiUpdateTopicComment = (id, content) => {
         content,
     });
 };
+
+export const apiChangePassword = (oldPassword, password) => {
+    return axios.post('/user/changePassword', {
+        oldPassword,
+        password,
+    });
+};
