@@ -3,7 +3,7 @@ import axios from 'axios';
 import { history } from 'umi';
 import { localSave } from '../utils';
 
-axios.defaults.baseURL = 'http://localhost:9000';
+axios.defaults.baseURL = process.env.baseURL || 'http://localhost:9000';
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(
