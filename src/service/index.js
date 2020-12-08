@@ -2,8 +2,9 @@ import { message } from 'antd';
 import axios from 'axios';
 import { history } from 'umi';
 import { localSave } from '../utils';
+import { url } from './constants';
 
-axios.defaults.baseURL = process.env.baseURL || 'http://localhost:9000';
+axios.defaults.baseURL = url;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(
