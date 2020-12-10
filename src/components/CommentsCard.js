@@ -1,8 +1,9 @@
 import { List, Card, Comment, Avatar, Space, Popconfirm } from 'antd';
 import { connect } from 'umi';
 import { UserOutlined } from '@ant-design/icons';
-import { formatDate } from '../utils';
+import { formatDate, jumpToUser } from '../utils';
 import { apiDeletComment } from '../service';
+import { history } from 'umi';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const { data, loading, global, callback, callback2 } = props;
@@ -25,12 +26,21 @@ export default connect(({ global }) => ({ global }))((props) => {
                         <Comment
                             avatar={
                                 <Avatar
+                                    onClick={() => jumpToUser(item.userId)}
                                     shape="square"
                                     size={64}
                                     icon={<UserOutlined />}
                                 />
                             }
-                            author={item.user?.username}
+                            author={
+                                <a
+                                    onClick={() => {
+                                        jumpToUser(item.userId);
+                                    }}
+                                >
+                                    {item.user?.username}
+                                </a>
+                            }
                             content={
                                 <div>
                                     <div style={{ whiteSpace: 'pre-wrap' }}>

@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
 import TopicInput from '../components/TopicInput';
-import { formatDate } from '../utils';
+import { formatDate, jumpToUser } from '../utils';
 
 export default connect(({ global }) => ({ global }))((props) => {
     const [data, setData] = useState([]);
@@ -26,7 +26,13 @@ export default connect(({ global }) => ({ global }))((props) => {
         <List.Item>
             <List.Item.Meta
                 avatar={
-                    <Avatar shape="square" size={64} icon={<UserOutlined />} />
+                    <Avatar
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => jumpToUser(item.userId)}
+                        shape="square"
+                        size={64}
+                        icon={<UserOutlined />}
+                    />
                 }
                 style={{ padding: '0 10px' }}
                 title={
@@ -39,9 +45,13 @@ export default connect(({ global }) => ({ global }))((props) => {
                     </a>
                 }
                 description={
-                    item.user?.username +
-                    ' 发表于 ' +
-                    formatDate(item.createdTime)
+                    <span>
+                        <a onClick={() => jumpToUser(item.userId)}>
+                            {item.user?.username}
+                        </a>
+                        {' 发表于 '}
+                        {formatDate(item.createdTime)}
+                    </span>
                 }
             />
         </List.Item>

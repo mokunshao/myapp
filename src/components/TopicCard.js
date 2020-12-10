@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, Popconfirm, Avatar, Space, Modal, Form } from 'antd';
 import { history, connect } from 'umi';
 import { apiDeleteTopic } from '../service';
-import { formatDate } from '../utils';
+import { formatDate, jumpToUser } from '../utils';
 import { UserOutlined } from '@ant-design/icons';
 import TopicEditForm from '../components/TopicEditForm';
 
@@ -46,9 +46,21 @@ export default connect(({ global }) => ({ global }))((props) => {
             <div>
                 <br />
                 <Space>
-                    <Avatar shape="square" size={64} icon={<UserOutlined />} />
+                    <Avatar
+                        style={{ cursor: 'pointer' }}
+                        shape="square"
+                        size={64}
+                        icon={<UserOutlined />}
+                        onClick={() => jumpToUser(data.userId)}
+                    />
                     <div>
-                        <div>本文由 {data.user?.username} 发表</div>
+                        <div>
+                            本文由{' '}
+                            <a onClick={() => jumpToUser(data.userId)}>
+                                {data.user?.username}
+                            </a>
+                            发表
+                        </div>
                         <div>发表于 {formatDate(data.createdTime)}</div>
                         <div>最后编辑于 {formatDate(data.updatedTime)}</div>
                     </div>

@@ -1,3 +1,5 @@
+import { history } from 'umi';
+
 export function localSave(key, data) {
     if (data != null && typeof data === 'object') {
         data = JSON.stringify(data);
@@ -29,4 +31,8 @@ export function localRemove(...keys) {
 
 export function formatDate(unixTime) {
     return new Date(unixTime * 1000).toLocaleDateString();
+}
+
+export function jumpToUser(id) {
+    history.push('/user?id=' + id);
 }
