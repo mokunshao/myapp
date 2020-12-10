@@ -2,28 +2,23 @@ import {
     apiGetUserInfo,
     apiGetUserSomeTopic,
     apiGetUserSomeTopicComment,
-} from '../service';
+} from '../../service';
 import { useState, useEffect } from 'react';
-import { Avatar, Card, List, Typography, Divider } from 'antd';
+import { Avatar, List, Divider } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { history, connect } from 'umi';
-import { formatDate, jumpToUser } from '../utils';
+import { history } from 'umi';
+import { formatDate, getId } from '../../utils';
 
 export default (props) => {
-    function getId() {
-        const {
-            location: { query },
-        } = props;
-        const { id } = query;
-        return id;
-    }
-
     const [item, setItem] = useState({});
     const [topics, setTopics] = useState([]);
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        const id = getId();
+        const id = getId(props);
+        if (!id) {
+            return;
+        }
         apiGetUserInfo(id).then((res) => {
             if (res?.data) {
                 setItem(res.data);
@@ -59,7 +54,15 @@ export default (props) => {
             </List.Item>
             <Divider orientation="left">最近发表的主题</Divider>
             <List
-                footer={<a>更多</a>}
+                footer={
+                    <a
+                        onClick={() => {
+                            history.push('/user/topics?id=' + item?.id);
+                        }}
+                    >
+                        更多
+                    </a>
+                }
                 bordered
                 dataSource={topics}
                 renderItem={(o) => (
@@ -79,7 +82,15 @@ export default (props) => {
             />
             <Divider orientation="left">最近发表的评论</Divider>
             <List
-                footer={<a>更多</a>}
+                footer={
+                    <a
+                        onClick={() => {
+                            history.push('/user/topic_comments?id=' + item?.id);
+                        }}
+                    >
+                        更多
+                    </a>
+                }
                 bordered
                 dataSource={comments}
                 renderItem={(o) => (

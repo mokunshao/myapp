@@ -36,3 +36,11 @@ export function formatDate(unixTime) {
 export function jumpToUser(id) {
     history.push('/user?id=' + id);
 }
+
+export function getId(props) {
+    const {
+        location: { query },
+    } = props;
+    const { id } = query;
+    return id;
+}
