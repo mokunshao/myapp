@@ -100,3 +100,11 @@ export const apiChangePassword = (oldPassword, password) => {
 export const apiGetUserInfo = (id) => {
     return axios.get('/user/info', { params: { id } });
 };
+
+export const apiGetUserSomeTopic = (id) => {
+    return axios.get('/topic/some/' + id);
+};
+
+export const apiGetUserSomeTopicComment = (id) => {
+    return axios.get('/topic_comment/some/' + id);
+};
