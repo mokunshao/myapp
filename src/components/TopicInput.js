@@ -1,18 +1,23 @@
-import { Form, Button, Input, Card, message } from 'antd';
+import { Form, Button, Input, Card, message, Radio } from 'antd';
 import { apiPostTopic } from '../service';
+import { connect } from 'umi';
+import { Select } from 'antd';
+
+const { Option } = Select;
 const { useForm } = Form;
 
 const { TextArea } = Input;
 
-export default ({ callback }) => {
+export default connect(({ global }) => ({ global }))((props) => {
     const [form] = useForm();
 
     const onFinish = (values) => {
-        const { title, content } = values;
-        apiPostTopic(title, content).then((res) => {
+        const { title, content, boardId } = values;
+        apiPostTopic(title, content, boardId).then((res) => {
             if (res?.status === 200) {
                 message.success('发表成功');
                 form.resetFields();
+                const { callback } = props;
                 callback();
             }
         });
@@ -53,6 +58,25 @@ export default ({ callback }) => {
                 >
                     <TextArea rows={4} placeholder="正文" />
                 </Form.Item>
+                <Form.Item
+                    name="boardId"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请选择话题',
+                        },
+                    ]}
+                >
+                    <Select placeholder="话题">
+                        {props?.global?.boards.map((o) => {
+                            return (
+                                <Option key={o.id} value={o.id}>
+                                    {o.name}
+                                </Option>
+                            );
+                        })}
+                    </Select>
+                </Form.Item>
                 <Form.Item>
                     <Button
                         htmlType="submit"
@@ -66,4 +90,4 @@ export default ({ callback }) => {
             </Form>
         </Card>
     );
-};
+});

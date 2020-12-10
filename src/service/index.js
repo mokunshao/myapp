@@ -55,10 +55,11 @@ export const apiLogout = () => {
     return axios.post('/user/logout');
 };
 
-export const apiPostTopic = (title, content) => {
+export const apiPostTopic = (title, content, boardId) => {
     return axios.post('/topic/add', {
         title,
         content,
+        boardId,
     });
 };
 
