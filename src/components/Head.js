@@ -47,7 +47,7 @@ export default (props) => {
             <Col flex="auto">
                 <HeadLogo />
             </Col>
-            <Col flex="wrap">
+            <Col>
                 <Space size="large">
                     {/* <a onClick={onClickAbout}>关于</a> */}
                     {user?.username ? action1() : action2()}

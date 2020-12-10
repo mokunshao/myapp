@@ -116,3 +116,7 @@ export const apiGetTopicsByUserId = (id) => {
 export const apiGetTopicCommentsByUserId = (id) => {
     return axios.get('/topic_comment/by_user/' + id);
 };
+
+export const apiGetAllBoardName = () => {
+    return axios.get('/board/all');
+};

@@ -1,7 +1,7 @@
 export default {
     namespace: 'global',
     state: {
-        name: 'q1',
+        boradNames: [],
         user: {},
     },
     effects: {

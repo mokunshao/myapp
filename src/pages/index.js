@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Radio, Space } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { history, connect } from 'umi';
 import { apiGetTopics } from '../service';
-import TopicInput from '../components/TopicInput';
 import { formatDate, jumpToUser } from '../utils';
 
 export default connect(({ global }) => ({ global }))((props) => {
@@ -59,6 +58,17 @@ export default connect(({ global }) => ({ global }))((props) => {
 
     return (
         <div>
+            <div style={{ padding: '0.5em' }}>
+                <Radio.Group defaultValue="a" buttonStyle="solid">
+                    <Radio.Button value="a">所有</Radio.Button>
+                    {props.global.boradNames.map((o) => {
+                        return (
+                            <Radio.Button value={o.id}>{o.name}</Radio.Button>
+                        );
+                    })}
+                </Radio.Group>
+            </div>
+
             <List
                 loading={loading}
                 itemLayout="horizontal"

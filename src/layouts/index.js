@@ -6,6 +6,7 @@ import Body from '../components/Body';
 import { localGet } from '../utils';
 import { useEffect } from 'react';
 import { connect } from 'umi';
+import { apiGetAllBoardName } from '../service';
 // import 'antd/dist/antd.css';
 
 const { Header, Footer, Content } = Layout;
@@ -18,6 +19,15 @@ export default connect(({ global }) => {
         if (user) {
             props.dispatch({ type: 'global/save', payload: { user } });
         }
+
+        apiGetAllBoardName().then((res) => {
+            if (res?.data) {
+                props.dispatch({
+                    type: 'global/save',
+                    payload: { boradNames: res.data },
+                });
+            }
+        });
     }, []);
 
     return (
