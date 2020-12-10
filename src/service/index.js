@@ -112,3 +112,7 @@ export const apiGetUserSomeTopicComment = (id) => {
 export const apiGetTopicsByUserId = (id) => {
     return axios.get('/topic/by_user/' + id);
 };
+
+export const apiGetTopicCommentsByUserId = (id) => {
+    return axios.get('/topic_comment/by_user/' + id);
+};

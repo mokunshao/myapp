@@ -1,11 +1,11 @@
-import { apiGetTopicsByUserId } from '../../service';
+import { apiGetTopicCommentsByUserId } from '../../service';
 import { useEffect, useState } from 'react';
 import { getId, formatDate } from '../../utils';
 import { List, Divider } from 'antd';
 import { history } from 'umi';
 
 export default (props) => {
-    const [topics, setTopics] = useState([]);
+    const [topicComments, setTopicComments] = useState([]);
     const [username, setUsername] = useState('');
 
     useEffect(() => {
@@ -13,9 +13,9 @@ export default (props) => {
         if (!id) {
             return;
         }
-        apiGetTopicsByUserId(id).then((res) => {
+        apiGetTopicCommentsByUserId(id).then((res) => {
             if (res?.data) {
-                setTopics(res.data);
+                setTopicComments(res.data);
                 if (res?.data[0]?.user?.username) {
                     setUsername(res?.data[0]?.user?.username);
                 }
@@ -25,19 +25,19 @@ export default (props) => {
 
     return (
         <div>
-            <Divider orientation="left">{username} 的所有主题</Divider>
+            <Divider orientation="left">{username} 的所有评论</Divider>
             <List
                 bordered
-                dataSource={topics}
+                dataSource={topicComments}
                 renderItem={(o) => (
                     <List.Item>
                         <span>
                             <a
                                 onClick={() =>
-                                    history.push('/topic?id=' + o.id)
+                                    history.push('/topic?id=' + o.topicId)
                                 }
                             >
-                                {o.title}
+                                {o.content}
                             </a>{' '}
                             发表于 {formatDate(o.createdTime)}
                         </span>
