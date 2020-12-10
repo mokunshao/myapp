@@ -2,19 +2,14 @@ import { Menu, Row, Col, Space } from 'antd';
 import HeadLogo from './HeadLogo';
 import { history, connect } from 'umi';
 import { jumpToUser, localRemove } from '../utils';
-// import { store } from '../store';
-// import { useContext } from 'react';
 import { apiLogout } from '../service';
 
 export default (props) => {
-    // const context = useContext(store);
-    // console.log('Head', context && context.user);
     const user = props.global?.user;
-
-    // console.log(user);
 
     const action1 = () => (
         <>
+            <a onClick={() => history.push('/topic_pub')}>发贴</a>
             <a onClick={() => jumpToUser(user?.id)}>{user?.username}</a>
             <a onClick={onClickSettings}>设置</a>
             <a onClick={onClickLogout}>退出</a>
@@ -54,7 +49,7 @@ export default (props) => {
             </Col>
             <Col flex="wrap">
                 <Space size="large">
-                    <a onClick={onClickAbout}>关于</a>
+                    {/* <a onClick={onClickAbout}>关于</a> */}
                     {user?.username ? action1() : action2()}
                 </Space>
             </Col>

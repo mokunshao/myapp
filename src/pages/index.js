@@ -59,7 +59,6 @@ export default connect(({ global }) => ({ global }))((props) => {
 
     return (
         <div>
-            {props.global.user.username && <TopicInput callback={fetchData} />}
             <List
                 loading={loading}
                 itemLayout="horizontal"

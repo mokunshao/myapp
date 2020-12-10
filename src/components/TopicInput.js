@@ -9,10 +9,12 @@ export default ({ callback }) => {
 
     const onFinish = (values) => {
         const { title, content } = values;
-        apiPostTopic(title, content).then(() => {
-            message.success('发表成功');
-            form.resetFields();
-            callback();
+        apiPostTopic(title, content).then((res) => {
+            if (res?.status === 200) {
+                message.success('发表成功');
+                form.resetFields();
+                callback();
+            }
         });
     };
 
