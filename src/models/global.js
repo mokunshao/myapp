@@ -1,7 +1,8 @@
 export default {
     namespace: 'global',
     state: {
-        boradNames: [],
+        boards: [],
+        checkedBoardId: 'all',
         user: {},
     },
     effects: {

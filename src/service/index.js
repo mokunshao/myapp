@@ -19,8 +19,12 @@ axios.interceptors.response.use(
     },
 );
 
-export const apiGetTopics = () => {
-    return axios.get('/topic');
+export const apiGetTopics = (boardId) => {
+    if (boardId === 'all') {
+        return axios.get('/topic');
+    } else {
+        return axios.get('/topic/by_board_id/' + boardId);
+    }
 };
 
 export const apiGetTopicDetail = (id) => {

@@ -10,16 +10,19 @@ export default connect(({ global }) => ({ global }))((props) => {
     const [loading, setLoading] = useState(false);
 
     const fetchData = () => {
-        setLoading(true);
-        apiGetTopics().then((res) => {
-            setData(res.data);
-            setLoading(false);
-        });
+        const boardId = props?.global?.checkedBoardId;
+        if (boardId) {
+            setLoading(true);
+            apiGetTopics(boardId).then((res) => {
+                setData(res.data);
+                setLoading(false);
+            });
+        }
     };
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [props?.global?.checkedBoardId]);
 
     const renderItem = (item) => (
         <List.Item>
@@ -59,11 +62,22 @@ export default connect(({ global }) => ({ global }))((props) => {
     return (
         <div>
             <div style={{ padding: '0.5em' }}>
-                <Radio.Group defaultValue="a" buttonStyle="solid">
-                    <Radio.Button value="a">所有</Radio.Button>
-                    {props.global.boradNames.map((o) => {
+                <Radio.Group
+                    value={props.global.checkedBoardId}
+                    onChange={(e) => {
+                        props.dispatch({
+                            type: 'global/save',
+                            payload: { checkedBoardId: e.target.value },
+                        });
+                    }}
+                    buttonStyle="solid"
+                >
+                    <Radio.Button value="all">所有</Radio.Button>
+                    {props.global.boards.map((o) => {
                         return (
-                            <Radio.Button value={o.id}>{o.name}</Radio.Button>
+                            <Radio.Button key={o.id} value={o.id}>
+                                {o.name}
+                            </Radio.Button>
                         );
                     })}
                 </Radio.Group>

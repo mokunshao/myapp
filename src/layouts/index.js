@@ -24,7 +24,7 @@ export default connect(({ global }) => {
             if (res?.data) {
                 props.dispatch({
                     type: 'global/save',
-                    payload: { boradNames: res.data },
+                    payload: { boards: res.data },
                 });
             }
         });
