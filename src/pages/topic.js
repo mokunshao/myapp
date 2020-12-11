@@ -1,4 +1,4 @@
-import { apigetComments, apiGetTopicDetail } from '../service';
+import { apiGetComments, apiGetTopicDetail } from '../service';
 import { useState, useEffect } from 'react';
 import { Modal, Form } from 'antd';
 import TopicCard from '../components/TopicCard';
@@ -37,7 +37,7 @@ export default connect(({ global }) => ({ global }))((props) => {
 
     function getComments(id) {
         setCommentsloading(true);
-        apigetComments(id).then((res) => {
+        apiGetComments(id).then((res) => {
             if (res?.data) {
                 setComments(res.data);
                 setCommentsloading(false);

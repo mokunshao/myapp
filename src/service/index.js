@@ -78,7 +78,7 @@ export const apiPostComment = (topicId, content) => {
     });
 };
 
-export const apigetComments = (topicId) => {
+export const apiGetComments = (topicId) => {
     return axios.get('/topic_comment/' + topicId);
 };
 
