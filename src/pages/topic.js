@@ -28,7 +28,7 @@ export default connect(({ global }) => ({ global }))((props) => {
     function getTopic(id) {
         setLoading(true);
         apiGetTopicDetail(id).then((res) => {
-            if (res.data) {
+            if (res?.data) {
                 setTopic(res.data);
                 setLoading(false);
             }
@@ -38,7 +38,7 @@ export default connect(({ global }) => ({ global }))((props) => {
     function getComments(id) {
         setCommentsloading(true);
         apigetComments(id).then((res) => {
-            if (res.data) {
+            if (res?.data) {
                 setComments(res.data);
                 setCommentsloading(false);
             }
