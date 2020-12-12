@@ -14,6 +14,7 @@ axios.interceptors.response.use(
         if (error.response.status === 401) {
             localSave('user', null);
             history.push('/login');
+            location.reload();
         }
         return error;
     },
