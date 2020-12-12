@@ -6,6 +6,7 @@
         "umi": "^3.3.0"
     },
     "scripts": {
-        "dev": "npx umi dev"
+        "dev": "npx umi dev",
+        "build": "npx umi build"
     }
 }

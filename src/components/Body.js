@@ -88,7 +88,7 @@ const SideBar = connect(({ global }) => ({ global }))((props) => {
             <br />
             或者使用测试账号：
             <br />
-            账号：gua密码：123
+            账号：gua 密码：123
         </Card>
     );
 });
