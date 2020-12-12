@@ -96,14 +96,24 @@ export default (props) => {
                 renderItem={(o) => (
                     <List.Item>
                         <span>
-                            <a
-                                onClick={() =>
-                                    history.push('/topic?id=' + o.topicId)
-                                }
-                            >
-                                {o.content}
-                            </a>{' '}
-                            发表于 {formatDate(o.createdTime)}
+                            {o.topic && o.topic.title ? (
+                                <>
+                                    {formatDate(o.createdTime)} 在主题{' '}
+                                    <a
+                                        onClick={() =>
+                                            history.push(
+                                                '/topic?id=' + o.topic.id,
+                                            )
+                                        }
+                                    >
+                                        {o.topic && o.topic.title}
+                                    </a>{' '}
+                                </>
+                            ) : (
+                                <>{formatDate(o.createdTime)} 在已删除主题</>
+                            )}
+                            发表了评论：
+                            {o.content}
                         </span>
                     </List.Item>
                 )}

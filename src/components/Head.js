@@ -28,6 +28,7 @@ export default (props) => {
     function onClickLogout() {
         localRemove('user');
         apiLogout();
+        history.push('/');
         location.reload();
     }
     function onClickAbout() {

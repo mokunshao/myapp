@@ -1,3 +1,3 @@
 export default () => {
-    return <div>© 2020 小论坛</div>;
+    return <div>© 2020 快论坛</div>;
 };

@@ -15,7 +15,7 @@ export default () => {
             }}
             onClick={onClick}
         >
-            小论坛
+            快论坛
         </div>
     );
 };

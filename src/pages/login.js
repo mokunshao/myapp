@@ -53,7 +53,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input placeholder="测试用户名gua" />
                     </Form.Item>
 
                     <Form.Item
@@ -66,7 +66,7 @@ export default connect(({ global }) => ({ global }))((props) => {
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password placeholder="测试密码123" />
                     </Form.Item>
 
                     <Form.Item>
